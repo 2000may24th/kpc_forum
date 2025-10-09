@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산업 AI 리더십 포럼</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 사용자 정의 스타일 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link.active {
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom: 2px solid #ffffff;
+        }
+        .nav-link:hover {
+            color: #e0e0e0;
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1920x1080/1a2a4c/ffffff?text=Industrial+AI+Leadership');
+            background-size: cover;
+            background-position: center;
+        }
+        .speaker-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            border-radius: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .schedule-table th, .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+        .schedule-table th {
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- 상단 고정 내비게이션 -->
+    <header class="gradient-bg fixed top-0 left-0 right-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">
+                <a href="#" class="nav-trigger" data-target="home">산업 AI 리더십 포럼</a>
+            </h1>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-white nav-link nav-trigger active" data-target="home">포럼 소개</a>
+                <a href="#" class="text-white nav-link nav-trigger" data-target="speakers">초청 연사</a>
+                <a href="#" class="text-white nav-link nav-trigger" data-target="program">프로그램</a>
+                <a href="#" class="text-white nav-link nav-trigger" data-target="apply">신청하기</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-800">
+            <a href="#" class="block py-2 px-6 text-white hover:bg-blue-700 nav-trigger" data-target="home">포럼 소개</a>
+            <a href="#" class="block py-2 px-6 text-white hover:bg-blue-700 nav-trigger" data-target="speakers">초청 연사</a>
+            <a href="#" class="block py-2 px-6 text-white hover:bg-blue-700 nav-trigger" data-target="program">프로그램</a>
+            <a href="#" class="block py-2 px-6 text-white hover:bg-blue-700 nav-trigger" data-target="apply">신청하기</a>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- 메인 페이지 (포럼 소개) -->
+        <section id="home" class="section active">
+            <!-- 슬로건 -->
+            <div class="hero-bg h-[60vh] flex items-center justify-center">
+                <div class="text-center bg-black bg-opacity-50 p-8 rounded-lg">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-4 text-white">산업 AI의 미래를 선도하다</h2>
+                    <p class="text-lg md:text-xl text-gray-200">혁신적인 기술과 비즈니스 전략이 만나는 최고의 지식 교류의 장</p>
+                </div>
+            </div>
+
+            <div class="bg-white">
+                <div class="container mx-auto px-6 py-16">
+                    <!-- 포럼 소개 -->
+                    <div class="text-center mb-16">
+                        <h3 class="text-3xl font-bold mb-4 text-blue-600">포럼에 오신 것을 환영합니다</h3>
+                        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                            '산업 AI 리더십 포럼'은 국내외 최고의 AI 전문가들과 산업 리더들이 모여 최신 기술 동향을 공유하고,
+                            비즈니스 적용 사례를 통해 미래 산업의 청사진을 그리는 연례 행사입니다.
+                            올해는 '지속 가능한 성장을 위한 AI'를 주제로 더 깊이 있는 인사이트를 제공할 것입니다.
+                        </p>
+                    </div>
+
+                    <!-- 포스터 -->
+                    <div class="mb-16">
+                         <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">포럼 포스터</h3>
+                         <div class="max-w-2xl mx-auto bg-white p-4 rounded-lg shadow-xl border">
+                            <img src="poster.png" alt="포럼 포스터" class="w-full h-auto rounded" onerror="this.onerror=null;this.src='https://placehold.co/800x1131/eeeeee/333333?text=Poster.png';">
+                         </div>
+                    </div>
+
+                    <!-- 프로그램 일정 -->
+                    <div class="mb-16">
+                        <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">주요 프로그램</h3>
+                        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                            <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg text-center">
+                                <i class="fas fa-microphone-alt text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-2">기조연설</h4>
+                                <p class="text-gray-600">글로벌 AI 리더가 전하는 산업의 미래</p>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg text-center">
+                                <i class="fas fa-comments text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-2">패널 토론</h4>
+                                <p class="text-gray-600">주요 산업별 AI 도입 전략 및 과제</p>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 p-6 rounded-lg text-center">
+                                <i class="fas fa-network-wired text-4xl text-blue-500 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-2">네트워킹 세션</h4>
+                                <p class="text-gray-600">참석자 간 자유로운 교류와 협력의 기회</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 오시는 길 -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">오시는 길</h3>
+                        <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                            <div class="w-full h-96 md:h-full rounded-lg overflow-hidden shadow-xl border">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.234816020527!2d127.0328551155941!3d37.50201217981018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3f70e063617%3A0x7b613e547d2b45a!2z7ISc7Jq47Yq567OE7IucIOqwleuCqO2GoOq1rCDsl7Trj5nrgqjrjIDroZwyMy1naWw!5e0!3m2!1sko!2skr!4v1672816913076!5m2!1sko!2skr"
+                                    width="100%"
+                                    height="100%"
+                                    style="border:0;"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <div class="bg-gray-50 p-8 rounded-lg border">
+                                <h4 class="text-2xl font-bold mb-4">행사장 정보</h4>
+                                <p class="mb-2"><strong class="text-blue-700">장소:</strong> AI 컨벤션 홀</p>
+                                <p class="mb-4"><strong class="text-blue-700">주소:</strong> 서울특별시 강남구 역삼동 603</p>
+                                
+                                <h4 class="text-2xl font-bold mb-4 mt-6">교통편 안내</h4>
+                                <p class="mb-2"><strong class="text-blue-700">지하철:</strong> 2호선 강남역 11번 출구, 도보 10분</p>
+                                <p class="mb-2"><strong class="text-blue-700">버스:</strong> 강남역 정류장 (23-XXX) 하차</p>
+                                <p><strong class="text-blue-700">주차:</strong> 행사장 내 주차 공간이 협소하오니 대중교통 이용을 권장합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 초청 연사 페이지 -->
+        <section id="speakers" class="section">
+            <div class="gradient-bg py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold mb-2 text-white">초청 연사</h2>
+                    <p class="text-lg text-blue-200">산업 AI의 현재와 미래를 이끌어가는 리더들을 만나보세요.</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50">
+                <div class="container mx-auto px-6 py-16">
+                    <!-- 기조 발표 -->
+                    <h3 class="text-3xl font-bold text-center mb-10 text-blue-600">기조 발표</h3>
+                    <div class="space-y-8 max-w-4xl mx-auto">
+                        <!-- 연사 1 -->
+                        <div class="speaker-card p-6 flex flex-col sm:flex-row items-center text-center sm:text-left sm:space-x-6">
+                            <img src="person_1.png" alt="연사 1 사진" class="w-28 h-28 rounded-full object-cover border-4 border-blue-500 mb-4 sm:mb-0 flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/112x112/3b82f6/ffffff?text=연사1';">
+                            <div>
+                                <h4 class="text-xl font-bold">김지수 박사</h4>
+                                <p class="text-blue-600">AI 기술 연구소장</p>
+                                <p class="text-gray-600 mt-2 text-sm">머신러닝 및 딥러닝 분야의 세계적인 권위자입니다.</p>
+                            </div>
+                        </div>
+                        <!-- 연사 2 -->
+                        <div class="speaker-card p-6 flex flex-col sm:flex-row items-center text-center sm:text-left sm:space-x-6">
+                            <img src="person_2.png" alt="연사 2 사진" class="w-28 h-28 rounded-full object-cover border-4 border-blue-500 mb-4 sm:mb-0 flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/112x112/3b82f6/ffffff?text=연사2';">
+                            <div>
+                                <h4 class="text-xl font-bold">이현우 대표</h4>
+                                <p class="text-blue-600">데이터 솔루션 기업 CEO</p>
+                                <p class="text-gray-600 mt-2 text-sm">빅데이터 기반의 비즈니스 혁신 전문가입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 축사 및 환영사 -->
+                    <h3 class="text-3xl font-bold text-center mt-20 mb-10 text-blue-600">축사 및 환영사</h3>
+                     <div class="space-y-8 max-w-4xl mx-auto">
+                        <!-- 연사 3 -->
+                        <div class="speaker-card p-6 flex flex-col sm:flex-row items-center text-center sm:text-left sm:space-x-6">
+                            <img src="person_3.png" alt="연사 3 사진" class="w-28 h-28 rounded-full object-cover border-4 border-gray-400 mb-4 sm:mb-0 flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/112x112/9ca3af/ffffff?text=연사3';">
+                            <div>
+                                <h4 class="text-xl font-bold">박선영 장관</h4>
+                                <p class="text-blue-600">과학기술정보통신부</p>
+                            </div>
+                        </div>
+                         <!-- 연사 4 -->
+                        <div class="speaker-card p-6 flex flex-col sm:flex-row items-center text-center sm:text-left sm:space-x-6">
+                            <img src="person_4.png" alt="연사 4 사진" class="w-28 h-28 rounded-full object-cover border-4 border-gray-400 mb-4 sm:mb-0 flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/112x112/9ca3af/ffffff?text=연사4';">
+                            <div>
+                                <h4 class="text-xl font-bold">최민준 회장</h4>
+                                <p class="text-blue-600">AI 산업 협회</p>
+                            </div>
+                        </div>
+                         <!-- 연사 5 -->
+                        <div class="speaker-card p-6 flex flex-col sm:flex-row items-center text-center sm:text-left sm:space-x-6">
+                            <img src="person_5.png" alt="연사 5 사진" class="w-28 h-28 rounded-full object-cover border-4 border-gray-400 mb-4 sm:mb-0 flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/112x112/9ca3af/ffffff?text=연사5';">
+                            <div>
+                                <h4 class="text-xl font-bold">정유진 총장</h4>
+                                <p class="text-blue-600">한국대학교</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 프로그램 페이지 -->
+        <section id="program" class="section">
+            <div class="gradient-bg py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold mb-2 text-white">프로그램</h2>
+                    <p class="text-lg text-blue-200">산업 AI의 미래를 조망하는 다채로운 세션이 준비되어 있습니다.</p>
+                </div>
+            </div>
+            <div class="bg-white">
+                <div class="container mx-auto px-6 py-16">
+                    <!-- 행사 개요 -->
+                    <div class="bg-gray-50 border border-gray-200 p-8 rounded-lg shadow-sm mb-12">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6">행사 개요</h3>
+                        <div class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-lg">
+                            <p><strong class="text-blue-700 w-24 inline-block">일시:</strong> 2024년 11월 28일 (목) 09:00 - 18:00</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">장소:</strong> 서울특별시 강남구 역삼동 603, AI 컨벤션 홀</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">주제:</strong> 지속 가능한 성장을 위한 AI</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">주최:</strong> 산업AI리더십포럼 조직위원회</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">주관:</strong> AI 연구원</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">후원:</strong> 과학기술정보통신부, AI 산업 협회</p>
+                            <p><strong class="text-blue-700 w-24 inline-block">문의:</strong> 02-1234-5678 / contact@aiforum.kr</p>
+                        </div>
+                    </div>
+
+                    <!-- 시간표 -->
+                    <div class="overflow-x-auto border rounded-lg">
+                        <table class="w-full text-left schedule-table">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/6">시간</th>
+                                    <th class="w-1/5">프로그램</th>
+                                    <th>주제 및 연사</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr>
+                                    <td>09:00 - 09:30</td>
+                                    <td>등록 및 네트워킹</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>09:30 - 10:00</td>
+                                    <td>개회사 및 축사</td>
+                                    <td>박선영 장관, 최민준 회장</td>
+                                </tr>
+                                <tr>
+                                    <td>10:00 - 11:00</td>
+                                    <td>기조연설 1</td>
+                                    <td><strong>AI, 제조업의 혁신을 이끌다</strong><br><span class="text-sm text-gray-600">김지수 박사 (AI 기술 연구소장)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>11:00 - 12:00</td>
+                                    <td>기조연설 2</td>
+                                    <td><strong>데이터가 바꾸는 금융의 미래</strong><br><span class="text-sm text-gray-600">이현우 대표 (데이터 솔루션 기업 CEO)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>12:00 - 13:30</td>
+                                    <td>점심 식사</td>
+                                    <td>-</td>
+                                </tr>
+                                 <tr>
+                                    <td>13:30 - 15:00</td>
+                                    <td>세션 1: 스마트 팩토리</td>
+                                    <td><strong>생산성 극대화를 위한 AI 도입 전략</strong><br><span class="text-sm text-gray-600">여러 연사</span></td>
+                                </tr>
+                                 <tr>
+                                    <td>15:00 - 15:30</td>
+                                    <td>커피 브레이크</td>
+                                    <td>-</td>
+                                </tr>
+                                 <tr>
+                                    <td>15:30 - 17:00</td>
+                                    <td>세션 2: AI와 헬스케어</td>
+                                    <td><strong>정밀 의료 시대를 여는 AI 기술</strong><br><span class="text-sm text-gray-600">여러 연사</span></td>
+                                </tr>
+                                 <tr>
+                                    <td>17:00 - 18:00</td>
+                                    <td>패널 토론 및 Q&A</td>
+                                    <td><strong>국내 산업 AI의 과제와 전망</strong><br><span class="text-sm text-gray-600">전체 연사</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 신청하기 페이지 -->
+        <section id="apply" class="section">
+            <div class="gradient-bg py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold mb-2 text-white">참가 신청</h2>
+                    <p class="text-lg text-blue-200">산업 AI 리더십 포럼에 참여하여 미래를 함께 만들어갈 기회를 놓치지 마세요.</p>
+                </div>
+            </div>
+             <div class="bg-gray-50">
+                <div class="container mx-auto px-6 py-24 flex items-center justify-center">
+                     <div class="text-center">
+                        <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto">지금 바로 신청하여 최고의 전문가들과 네트워크를 형성하고, 산업의 미래를 바꿀 인사이트를 얻어 가세요.</p>
+                        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300 shadow-lg transform hover:scale-105">
+                            Google Form으로 신청하기 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                     </div>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- 하단 패널 -->
+    <footer class="bg-gray-100 border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-600">
+            <p>&copy; 2024 Industrial AI Leadership Forum. All Rights Reserved.</p>
+            <p class="mt-2 text-sm">산업AI리더십포럼 조직위원회</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const triggers = document.querySelectorAll('.nav-trigger');
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // 페이지 전환 함수
+            const switchPage = (targetId) => {
+                sections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                // 데스크탑 네비게이션 활성화 상태 업데이트
+                document.querySelectorAll('header .nav-link').forEach(link => {
+                     if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                window.scrollTo(0, 0); // 페이지 전환 시 최상단으로 스크롤
+                mobileMenu.classList.add('hidden'); // 모바일 메뉴 닫기
+            };
+
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.dataset.target;
+                    switchPage(targetId);
+                });
+            });
+
+            // 모바일 메뉴 토글
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+
