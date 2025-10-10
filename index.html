@@ -88,7 +88,7 @@
         <!-- 메인 페이지 (포럼 소개) -->
         <section id="home">
             <!-- 슬로건 -->
-            <div class="hero-bg h-[calc(100vh-64px)] mt-16 flex items-center justify-center">
+            <div class="hero-bg h-[70vh] mt-16 flex items-center justify-center">
                 <div class="text-center bg-black bg-opacity-60 p-8 rounded-lg">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">대한민국 산업인공지능 포럼</h2>
                     <p class="text-lg md:text-2xl text-blue-200 font-semibold tracking-wider">"ALL ON INDUSTRIAL SYSTEM AI"</p>
@@ -118,23 +118,11 @@
                         </div>
                     </div>
 
-                    <!-- 오시는 길 -->
-                    <div>
-                        <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">오시는 길</h3>
-                        <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                            <div class="w-full h-96 md:h-full rounded-lg overflow-hidden shadow-xl border">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.31758141381!2d127.02462821559406!3d37.50021397981061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f192b001%3A0x1a7a0fee4f56f34e!2z64W467O07YWcIOy2mOuyhO2UhOuhnOq0keygnO2KuA!5e0!3m2!1sko!2skr!4v1672817000000!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                            <div class="bg-gray-50 p-8 rounded-lg border">
-                                <h4 class="text-2xl font-bold mb-4">행사장 정보</h4>
-                                <p class="mb-2"><strong class="text-blue-700">장소:</strong> 노보텔 앰배서더 서울 강남</p>
-                                <p class="mb-4"><strong class="text-blue-700">주소:</strong> 서울 강남구 봉은사로 130</p>
-                                
-                                <h4 class="text-2xl font-bold mb-4 mt-6">교통편 안내</h4>
-                                <p class="mb-2"><strong class="text-blue-700">지하철:</strong> 9호선 신논현역 4번 출구, 도보 5분</p>
-                                <p class="mb-2"><strong class="text-blue-700">버스:</strong> 신논현역, 노보텔 앰배서더 호텔 정류장 하차</p>
-                                <p><strong class="text-blue-700">주차:</strong> 행사장 내 주차 지원이 가능하나, 가급적 대중교통 이용을 권장합니다.</p>
-                            </div>
+                    <!-- 포스터 -->
+                    <div class="my-20">
+                        <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">포럼 포스터</h3>
+                        <div class="flex justify-center">
+                            <img src="poster.jpg" alt="산업인공지능 포럼 포스터" class="max-w-full md:max-w-2xl rounded-lg shadow-2xl border" onerror="this.onerror=null;this.src='https://placehold.co/768x1080/cccccc/ffffff?text=Poster';">
                         </div>
                     </div>
                 </div>
@@ -247,9 +235,30 @@
             </div>
         </section>
 
-        <!-- 참가 신청 페이지 -->
+        <!-- 참가 신청 및 오시는 길 -->
         <section id="apply" class="bg-gray-50">
-            <div class="container mx-auto px-6 py-24 flex items-center justify-center">
+            <div class="container mx-auto px-6 py-20">
+                <!-- 오시는 길 -->
+                <div class="mb-20">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-blue-600">오시는 길</h3>
+                    <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                        <div class="w-full h-96 md:h-full rounded-lg overflow-hidden shadow-xl border">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.31758141381!2d127.02462821559406!3d37.50021397981061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158f192b001%3A0x1a7a0fee4f56f34e!2z64W467O07YWcIOy2mOuyhO2UhOuhnOq0keygnO2KuA!5e0!3m2!1sko!2skr!4v1672817000000!5m2!1sko!2skr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg border shadow-lg">
+                            <h4 class="text-2xl font-bold mb-4">행사장 정보</h4>
+                            <p class="mb-2"><strong class="text-blue-700">장소:</strong> 노보텔 앰배서더 서울 강남</p>
+                            <p class="mb-4"><strong class="text-blue-700">주소:</strong> 서울 강남구 봉은사로 130</p>
+                            
+                            <h4 class="text-2xl font-bold mb-4 mt-6">교통편 안내</h4>
+                            <p class="mb-2"><strong class="text-blue-700">지하철:</strong> 9호선 신논현역 4번 출구, 도보 5분</p>
+                            <p class="mb-2"><strong class="text-blue-700">버스:</strong> 신논현역, 노보텔 앰배서더 호텔 정류장 하차</p>
+                            <p><strong class="text-blue-700">주차:</strong> 행사장 내 주차 지원이 가능하나, 가급적 대중교통 이용을 권장합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- 참가 신청 -->
                  <div class="text-center bg-white p-12 rounded-lg shadow-xl border max-w-3xl mx-auto">
                     <h2 class="text-3xl font-bold mb-2 text-blue-600">참가 신청</h2>
                     <p class="text-lg text-gray-600 mb-8">현장에서 실제로 활용 가능한 산업 AI의 모든 것을 만나보세요.</p>
@@ -318,5 +327,4 @@
     </script>
 </body>
 </html>
-
 
