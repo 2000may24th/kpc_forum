@@ -515,44 +515,35 @@
                 
                 <!-- Google Form과 연결된 폼 -->
                 <form class="registration-form" id="registrationForm">
-                    <!-- Google Form의 숨겨진 필드 추가 -->
-                    <input type="hidden" name="fvv" value="1">
-                    <input type="hidden" name="fbzx" value="7984482455434153036">
-
+                    <!-- 불필요한 숨겨진 필드 제거 -->
                     <div class="form-group">
                         <label for="name">성명 *</label>
-                        <!-- Google Form의 '성명' 필드 name 속성: entry.1519559884 -->
                         <input type="text" id="name" name="entry.1519559884" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="company">소속 기관/회사 *</label>
-                        <!-- Google Form의 '소속' 필드 name 속성: entry.129349057 -->
                         <input type="text" id="company" name="entry.129349057" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="position">직책 *</label>
-                        <!-- Google Form의 '직책' 필드 name 속성: entry.226024529 -->
                         <input type="text" id="position" name="entry.226024529" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">이메일 *</label>
-                        <!-- Google Form의 '이메일' 필드 name 속성: entry.146846858 -->
                         <input type="email" id="email" name="entry.146846858" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">연락처 *</label>
-                        <!-- Google Form의 '연락처' 필드 name 속성: entry.155091255 -->
                         <input type="tel" id="phone" name="entry.155091255" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="interests">관심 세션 (복수 선택 가능)</label>
                         <div class="checkbox-group">
-                             <!-- Google Form의 '관심 세션' 필드 name 속성: entry.1735254319 -->
                             <label><input type="checkbox" name="entry.1735254319" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
                             <label><input type="checkbox" name="entry.1735254319" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
                             <label><input type="checkbox" name="entry.1735254319" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
@@ -618,25 +609,29 @@
         // Google Form 제출 스크립트 (iframe 방식)
         const registrationForm = document.getElementById('registrationForm');
         const successMessage = document.getElementById('submission-success-message');
+        const hiddenIframe = document.getElementById('hidden_iframe');
+        let formSubmitted = false;
 
         // 폼의 action과 target 속성 설정
         registrationForm.setAttribute('action', 'https://docs.google.com/forms/d/e/1FAIpQLSc0tZORAtWylFueIWTdcsG07ASKRsMaiMYXeJPa1xG-isn8Ww/formResponse');
         registrationForm.setAttribute('method', 'POST');
         registrationForm.setAttribute('target', 'hidden_iframe');
 
-        let submitted = false;
+        // 폼 제출 이벤트 리스너
         registrationForm.addEventListener('submit', () => {
-            // 제출이 한 번만 처리되도록 플래그 설정
-            if (submitted) return;
+            formSubmitted = true;
+            const submitButton = registrationForm.querySelector('.btn-submit');
+            submitButton.disabled = true;
+            submitButton.textContent = '제출 중...';
+        });
 
-            submitted = true;
-            
-            // 제출 후 잠시 뒤에 성공 메시지를 표시합니다.
-            // 이렇게 하면 사용자는 즉각적인 피드백을 받고, 폼 데이터는 백그라운드에서 전송됩니다.
-            setTimeout(() => {
+        // Iframe 로드 완료 이벤트 리스너
+        hiddenIframe.addEventListener('load', () => {
+            // 폼이 제출된 후에만 성공 메시지를 표시합니다.
+            if (formSubmitted) {
                 registrationForm.style.display = 'none';
                 successMessage.style.display = 'block';
-            }, 500); // 0.5초 지연
+            }
         });
     </script>
 </body>
