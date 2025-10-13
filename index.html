@@ -513,41 +513,40 @@
                     </div>
                 </div>
                 
-                <!-- Google Form과 연결된 폼 -->
+                <!-- Google Apps Script와 연결될 폼 -->
                 <form class="registration-form" id="registrationForm">
-                    <!-- 불필요한 숨겨진 필드 제거 -->
                     <div class="form-group">
                         <label for="name">성명 *</label>
-                        <input type="text" id="name" name="entry.1519559884" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="company">소속 기관/회사 *</label>
-                        <input type="text" id="company" name="entry.129349057" required>
+                        <input type="text" id="company" name="company" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="position">직책 *</label>
-                        <input type="text" id="position" name="entry.226024529" required>
+                        <input type="text" id="position" name="position" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">이메일 *</label>
-                        <input type="email" id="email" name="entry.146846858" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">연락처 *</label>
-                        <input type="tel" id="phone" name="entry.155091255" required>
+                        <input type="tel" id="phone" name="phone" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="interests">관심 세션 (복수 선택 가능)</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="entry.1735254319" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
-                            <label><input type="checkbox" name="entry.1735254319" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
-                            <label><input type="checkbox" name="entry.1735254319" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
-                            <label><input type="checkbox" name="entry.1735254319" value="Panel Discussion"> Panel Discussion</label>
+                            <label><input type="checkbox" name="interests" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
+                            <label><input type="checkbox" name="interests" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
+                            <label><input type="checkbox" name="interests" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
+                            <label><input type="checkbox" name="interests" value="Panel Discussion"> Panel Discussion</label>
                         </div>
                     </div>
                     
@@ -561,8 +560,6 @@
                     소중한 시간을 내어주셔서 감사합니다.
                 </div>
                 
-                <!-- Google Form 제출을 위한 숨겨진 Iframe -->
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
             </div>
         </div>
     </section>
@@ -606,32 +603,44 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
-        // Google Form 제출 스크립트 (iframe 방식)
         const registrationForm = document.getElementById('registrationForm');
         const successMessage = document.getElementById('submission-success-message');
-        const hiddenIframe = document.getElementById('hidden_iframe');
-        let formSubmitted = false;
+        const submitButton = registrationForm.querySelector('.btn-submit');
 
-        // 폼의 action과 target 속성 설정
-        registrationForm.setAttribute('action', 'https://docs.google.com/forms/d/e/1FAIpQLSc0tZORAtWylFueIWTdcsG07ASKRsMaiMYXeJPa1xG-isn8Ww/formResponse');
-        registrationForm.setAttribute('method', 'POST');
-        registrationForm.setAttribute('target', 'hidden_iframe');
+        // !!! 중요: 아래 튜토리얼에 따라 생성된 Google Apps Script 웹 앱 URL을 붙여넣으세요.
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxANZ1-AL32TFSNT3-pf29MPWwvo20Xeli1dAsiBKmEuOeOP6B1sAKqJV6N_Rq293c5uA/exec"; 
 
-        // 폼 제출 이벤트 리스너
-        registrationForm.addEventListener('submit', () => {
-            formSubmitted = true;
-            const submitButton = registrationForm.querySelector('.btn-submit');
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+
             submitButton.disabled = true;
             submitButton.textContent = '제출 중...';
-        });
 
-        // Iframe 로드 완료 이벤트 리스너
-        hiddenIframe.addEventListener('load', () => {
-            // 폼이 제출된 후에만 성공 메시지를 표시합니다.
-            if (formSubmitted) {
-                registrationForm.style.display = 'none';
-                successMessage.style.display = 'block';
-            }
+            // 폼 데이터를 FormData 객체로 가져옵니다.
+            const formData = new FormData(registrationForm);
+
+            // fetch를 사용하여 Google Apps Script로 데이터를 보냅니다.
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    // 성공 시
+                    registrationForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    // 실패 시 (오류 처리)
+                    throw new Error(data.message || '알 수 없는 오류가 발생했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('신청서 제출에 실패했습니다. 잠시 후 다시 시도해주세요. 오류: ' + error.message);
+                submitButton.disabled = false;
+                submitButton.textContent = '참가 신청하기';
+            });
         });
     </script>
 </body>
