@@ -14,6 +14,20 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/force-visible.css">
+    <style>
+        /* 추가된 스타일 */
+        #submission-success-message {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #e6f4ea;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -499,39 +513,46 @@
                     </div>
                 </div>
                 
+                <!-- Google Form과 연결된 폼 -->
                 <form class="registration-form" id="registrationForm">
                     <div class="form-group">
                         <label for="name">성명 *</label>
-                        <input type="text" id="name" name="name" required>
+                        <!-- Google Form의 '성명' 필드 name 속성: entry.1812952331 -->
+                        <input type="text" id="name" name="entry.1812952331" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="company">소속 기관/회사 *</label>
-                        <input type="text" id="company" name="company" required>
+                        <!-- Google Form의 '소속' 필드 name 속성: entry.1434994229 -->
+                        <input type="text" id="company" name="entry.1434994229" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="position">직책 *</label>
-                        <input type="text" id="position" name="position" required>
+                        <!-- Google Form의 '직책' 필드 name 속성: entry.141261421 -->
+                        <input type="text" id="position" name="entry.141261421" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">이메일 *</label>
-                        <input type="email" id="email" name="email" required>
+                        <!-- Google Form의 '이메일' 필드 name 속성: entry.1084291771 -->
+                        <input type="email" id="email" name="entry.1084291771" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">연락처 *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <!-- Google Form의 '연락처' 필드 name 속성: entry.199432029 -->
+                        <input type="tel" id="phone" name="entry.199432029" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="interests">관심 세션 (복수 선택 가능)</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="interests" value="session1"> AI for Design and Manufacturing</label>
-                            <label><input type="checkbox" name="interests" value="session2"> Agentic Manufacturing System</label>
-                            <label><input type="checkbox" name="interests" value="session3"> Supply Chain Operation Intelligence</label>
-                            <label><input type="checkbox" name="interests" value="session4"> Panel Discussion</label>
+                             <!-- Google Form의 '관심 세션' 필드 name 속성: entry.979017647 -->
+                            <label><input type="checkbox" name="entry.979017647" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
+                            <label><input type="checkbox" name="entry.979017647" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
+                            <label><input type="checkbox" name="entry.979017647" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
+                            <label><input type="checkbox" name="entry.979017647" value="Panel Discussion"> Panel Discussion</label>
                         </div>
                     </div>
                     
@@ -539,6 +560,11 @@
                         참가 신청하기
                     </button>
                 </form>
+                <!-- 제출 완료 메시지 -->
+                <div id="submission-success-message">
+                    <strong>참가 신청이 완료되었습니다.</strong><br>
+                    소중한 시간을 내어주셔서 감사합니다.
+                </div>
             </div>
         </div>
     </section>
@@ -581,5 +607,31 @@
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script>
+        // Google Form 제출 스크립트
+        const registrationForm = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('submission-success-message');
+
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 기본 폼 제출 동작 방지
+            
+            const formData = new FormData(registrationForm);
+            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc0tZORAtWylFueIWTdcsG07ASKRsMaiMYXeJPa1xG-isn8Ww/formResponse';
+
+            fetch(googleFormUrl, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // CORS 정책 우회
+            }).then(() => {
+                // 성공적으로 제출된 후
+                registrationForm.style.display = 'none'; // 폼 숨기기
+                successMessage.style.display = 'block'; // 성공 메시지 보이기
+            }).catch(error => {
+                // 오류 처리
+                console.error('Error:', error);
+                alert('신청서 제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
+            });
+        });
+    </script>
 </body>
 </html>
