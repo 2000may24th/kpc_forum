@@ -517,42 +517,42 @@
                 <form class="registration-form" id="registrationForm">
                     <div class="form-group">
                         <label for="name">성명 *</label>
-                        <!-- Google Form의 '성명' 필드 name 속성: entry.1812952331 -->
-                        <input type="text" id="name" name="entry.1812952331" required>
+                        <!-- Google Form의 '성명' 필드 name 속성: entry.1519559884 -->
+                        <input type="text" id="name" name="entry.1519559884" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="company">소속 기관/회사 *</label>
-                        <!-- Google Form의 '소속' 필드 name 속성: entry.1434994229 -->
-                        <input type="text" id="company" name="entry.1434994229" required>
+                        <!-- Google Form의 '소속' 필드 name 속성: entry.129349057 -->
+                        <input type="text" id="company" name="entry.129349057" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="position">직책 *</label>
-                        <!-- Google Form의 '직책' 필드 name 속성: entry.141261421 -->
-                        <input type="text" id="position" name="entry.141261421" required>
+                        <!-- Google Form의 '직책' 필드 name 속성: entry.226024529 -->
+                        <input type="text" id="position" name="entry.226024529" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">이메일 *</label>
-                        <!-- Google Form의 '이메일' 필드 name 속성: entry.1084291771 -->
-                        <input type="email" id="email" name="entry.1084291771" required>
+                        <!-- Google Form의 '이메일' 필드 name 속성: entry.146846858 -->
+                        <input type="email" id="email" name="entry.146846858" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">연락처 *</label>
-                        <!-- Google Form의 '연락처' 필드 name 속성: entry.199432029 -->
-                        <input type="tel" id="phone" name="entry.199432029" required>
+                        <!-- Google Form의 '연락처' 필드 name 속성: entry.155091255 -->
+                        <input type="tel" id="phone" name="entry.155091255" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="interests">관심 세션 (복수 선택 가능)</label>
                         <div class="checkbox-group">
-                             <!-- Google Form의 '관심 세션' 필드 name 속성: entry.979017647 -->
-                            <label><input type="checkbox" name="entry.979017647" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
-                            <label><input type="checkbox" name="entry.979017647" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
-                            <label><input type="checkbox" name="entry.979017647" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
-                            <label><input type="checkbox" name="entry.979017647" value="Panel Discussion"> Panel Discussion</label>
+                             <!-- Google Form의 '관심 세션' 필드 name 속성: entry.1735254319 -->
+                            <label><input type="checkbox" name="entry.1735254319" value="AI for Design and Manufacturing"> AI for Design and Manufacturing</label>
+                            <label><input type="checkbox" name="entry.1735254319" value="Agentic Manufacturing System"> Agentic Manufacturing System</label>
+                            <label><input type="checkbox" name="entry.1735254319" value="Supply Chain Operation Intelligence"> Supply Chain Operation Intelligence</label>
+                            <label><input type="checkbox" name="entry.1735254319" value="Panel Discussion"> Panel Discussion</label>
                         </div>
                     </div>
                     
@@ -565,6 +565,9 @@
                     <strong>참가 신청이 완료되었습니다.</strong><br>
                     소중한 시간을 내어주셔서 감사합니다.
                 </div>
+                
+                <!-- Google Form 제출을 위한 숨겨진 Iframe -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
             </div>
         </div>
     </section>
@@ -608,30 +611,30 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
-        // Google Form 제출 스크립트
+        // Google Form 제출 스크립트 (iframe 방식)
         const registrationForm = document.getElementById('registrationForm');
         const successMessage = document.getElementById('submission-success-message');
 
-        registrationForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // 기본 폼 제출 동작 방지
-            
-            const formData = new FormData(registrationForm);
-            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc0tZORAtWylFueIWTdcsG07ASKRsMaiMYXeJPa1xG-isn8Ww/formResponse';
+        // 폼의 action과 target 속성 설정
+        registrationForm.setAttribute('action', 'https://docs.google.com/forms/d/e/1FAIpQLSc0tZORAtWylFueIWTdcsG07ASKRsMaiMYXeJPa1xG-isn8Ww/formResponse');
+        registrationForm.setAttribute('method', 'POST');
+        registrationForm.setAttribute('target', 'hidden_iframe');
 
-            fetch(googleFormUrl, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors' // CORS 정책 우회
-            }).then(() => {
-                // 성공적으로 제출된 후
-                registrationForm.style.display = 'none'; // 폼 숨기기
-                successMessage.style.display = 'block'; // 성공 메시지 보이기
-            }).catch(error => {
-                // 오류 처리
-                console.error('Error:', error);
-                alert('신청서 제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
-            });
+        let submitted = false;
+        registrationForm.addEventListener('submit', () => {
+            // 제출이 한 번만 처리되도록 플래그 설정
+            if (submitted) return;
+
+            submitted = true;
+            
+            // 제출 후 잠시 뒤에 성공 메시지를 표시합니다.
+            // 이렇게 하면 사용자는 즉각적인 피드백을 받고, 폼 데이터는 백그라운드에서 전송됩니다.
+            setTimeout(() => {
+                registrationForm.style.display = 'none';
+                successMessage.style.display = 'block';
+            }, 500); // 0.5초 지연
         });
     </script>
 </body>
 </html>
+
