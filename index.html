@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Line Gallery</title>
+  <title>Vertical Image Gallery</title>
   <style>
     body {
       background-color: #f9f9f9;
@@ -15,12 +15,12 @@
     }
     .gallery {
       display: flex;
-      flex-direction: row;
+      flex-direction: column; /* 세로 방향으로 정렬 */
       align-items: center;
       gap: 0; /* 간격 제거 */
     }
     .gallery img {
-      width: 480px;  /* 이미지 폭 확대 */
+      width: 480px;  /* 폭 크게 */
       height: auto;
       display: block;
       margin: 0;
